@@ -105,12 +105,14 @@ function App() {
             </FormControl>
                 <MultiSelect options={typeOptions} setOptions={setTypeOptions} label="Type" />
                 <MultiSelect options={dietOptions} setOptions={setDietOptions} label="Diet Restriction" />
-                <Typography>Total price: $ {[...cart.values()].reduce((p, i) => p += bakeryData[i].price, 0)}</Typography>
+                <Typography sx={{ alpha: 0.6 }} component="div">Cart</Typography>
+                {[...cart.values()].map(i => (<Typography>{bakeryData[i].name}</Typography>))}
+                <Typography>Total price: $ {[...cart.values()].reduce((p, i) => p += bakeryData[i].price, 0).toFixed(2)}</Typography>
             </Box>
         </Grid>
         <Grid item xs={9} container>
             {bakeryDataFiltered.map(item => (
-                <Grid item xs={6} sm={4}>
+                <Grid item xs={12} sm={6} md={4}>
                     <ItemCard value={item.index} item={item} selected={cart.has(item.index)} onChange={handleCartChange} />
                 </Grid>
             ))}
